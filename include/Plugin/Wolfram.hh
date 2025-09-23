@@ -13,7 +13,7 @@ namespace PLC
         public:
             Wolfram();
             Wolfram(std::vector<size_t> tab_init);
-            Wolfram(std::vector<size_t> tab_init, size_t generation_id_init);
+            Wolfram(std::vector<size_t> tab_init, int generation_id_init);
             ~Wolfram() = default;
 
             std::vector<size_t> getTab();

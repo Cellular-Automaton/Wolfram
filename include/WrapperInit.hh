@@ -11,7 +11,7 @@
 
 namespace Wrapper
 {
-    Napi::Float64Array add_wrapped_wolfram(const Napi::CallbackInfo &info);
+    Napi::Uint32Array add_wrapped_wolfram(const Napi::CallbackInfo &info);
     Napi::Array add_get_params(const Napi::CallbackInfo &info);
     Napi::Object init(Napi::Env env, Napi::Object exports);
     NODE_API_MODULE(addon, init)

@@ -12,6 +12,6 @@
 
 namespace Wrapper
 {
-    std::vector<double> simulate_wolfram(int *tab_init_1D, int generation_id, int width);
+    std::vector<size_t> simulate_wolfram(unsigned int *tab_init_1D, int generation_id, int width);
 
 } // namespace Wrapper

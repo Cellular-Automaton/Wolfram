@@ -11,21 +11,20 @@
 #include <iostream>
 #include <string>
 
-Napi::Float64Array Wrapper::add_wrapped_wolfram(const Napi::CallbackInfo &info)
+Napi::Uint32Array Wrapper::add_wrapped_wolfram(const Napi::CallbackInfo &info)
 {
     Napi::Env env = info.Env(); // check if arguments are integer only.
     /*    if (info.Length() < 2 || !info[0].IsNumber() || !info[1].IsNumber()) {
             Napi::TypeError::New(env, "arg1::Number, arg2::Number expected")
                 .ThrowAsJavaScriptException();
-        }*/ // convert javascripts datatype to c++, 
-    Napi::Float64Array first = info[0].As<Napi::Float64Array>();
-    Napi::Number second =
-        info[1].As<Napi::Number>(); // run c++ function return value and return it in javascript
+        }*/ // convert javascripts datatype to c++,
+    Napi::Uint32Array first = info[0].As<Napi::Uint32Array>();
+    Napi::Number second = info[1].As<Napi::Number>();
     Napi::Number third = info[2].As<Napi::Number>();
 
-    Napi::Float64Array return_value = Napi::Float64Array::New(env, first.ByteLength() / 8);
+    Napi::Uint32Array return_value = Napi::Uint32Array::New(env, first.ByteLength() / 8);
 
-    std::vector<double> val{Wrapper::simulate_wolfram(
+    std::vector<size_t> val{Wrapper::simulate_wolfram(
         first.Data(), second.Int32Value(), third.Int32Value())};
     for (size_t i{0}; i < val.size(); i++)
         return_value.Set(i, val[i]);
@@ -57,7 +56,7 @@ Napi::Array Wrapper::add_get_params(const Napi::CallbackInfo &info)
      * */
 
     Napi::Env env = info.Env(); // check if arguments are integer only.
-    std::array<std::string, 3> tmp{"tab_init:Float64Array", "generation_id:Number", "width:Number"};
+    std::array<std::string, 3> tmp{"tab_init:Float64Array", " generation_id:Number", "width:Number"};
     //    std::cout << sizeof(*tmp.data()) << '\n';
     Napi::Array return_value = Napi::Array::New(env, tmp.size());
     for (size_t i{0}; i < tmp.size(); i++)

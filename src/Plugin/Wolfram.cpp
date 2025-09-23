@@ -16,7 +16,7 @@ PLC::Wolfram::Wolfram(std::vector<size_t> tab_init)
     this->generation_id = 110;
 }
 
-PLC::Wolfram::Wolfram(std::vector<size_t> tab_init, size_t generation_id_init)
+PLC::Wolfram::Wolfram(std::vector<size_t> tab_init, int generation_id_init)
 {
     this->tab = std::move(tab_init);
     this->generation_id = generation_id_init;

@@ -6,7 +6,7 @@
 #include <Plugin/Wolfram.hh>
 #include <Wrapper/WrapperWolfram.hh>
 
-std::vector<size_t> Wrapper::simulate_wolfram(int *tab_init_1D, int generation_id, int width)
+std::vector<size_t> Wrapper::simulate_wolfram(unsigned int *tab_init_1D, int generation_id, int width)
 {
     std::vector<size_t> tab_init_1d{};
 
