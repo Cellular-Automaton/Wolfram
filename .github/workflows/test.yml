@@ -1,0 +1,54 @@
+name: Building
+
+on:
+  release:
+    types: [published]
+permissions:
+  contents: write
+
+
+jobs:
+  release:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        include:
+          - os: ubuntu-latest
+            name: Wolfram-linux
+          - os: windows-latest
+            name: Wolfram-Windows
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Build addon
+        run: |
+          npm install
+        shell: bash
+
+      - name: Compress File
+        uses: thedoctor0/zip-release@0.7.5
+        with:
+          type: "zip"
+          directory: build/Release/
+          filename: ${{matrix.name}}.zip
+
+      - name: Publish & upload artifact
+        uses: nanoufo/action-upload-artifacts-and-release-assets@v2
+        with:
+          path: |
+            **/build/Release/${{matrix.name}}.zip
+          if-no-files-found: warn
+          upload-release-files: true
+          release-upload-url: ${{github.event.release.upload_url}}
+
+
+
