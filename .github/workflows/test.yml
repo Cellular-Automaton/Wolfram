@@ -11,12 +11,14 @@ jobs:
   release:
     strategy:
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-latest, windows-latest, macos-latest]
         include:
           - os: ubuntu-latest
             name: Wolfram-linux
           - os: windows-latest
             name: Wolfram-Windows
+          - os: macos-latest
+            name: Wolfram-Macos
 
     runs-on: ${{ matrix.os }}
 
